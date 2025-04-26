@@ -1,7 +1,7 @@
 'use client'
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { Badge, BookText, LucideIcon, PanelLeftClose, PanelRightClose } from 'lucide-react';
+import { ArrowDown, ArrowUp, Badge, BookText, BugIcon, Currency, KeyRound, Landmark, LayoutDashboard, LucideIcon, PanelLeftClose, PanelRightClose, User, Users, Webhook } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ export type NavItem = {
   disabled?: boolean;
   external?: boolean; 
   // icon?: keyof typeof Icons;
-  icon?: string;
+  icon?: LucideIcon;
 };
 
 export type SidebarNavItem = {
@@ -33,18 +33,19 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "MENU",
     items: [
      
-      { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
-      { href: "/dashboard/customers", icon: "dashboard", title: "Customers" },
-      { href: "/dashboard/payins", icon: "dashboard", title: "Payins" },
-      { href: "/dashboard/payouts", icon: "dashboard", title: "Payouts" },
+      { href: "/dashboard", icon: LayoutDashboard, title: "Dashboard" },
+      { href: "/dashboard/customers", icon: User, title: "Customers" },
+       { href: "/dashboard/bank-accounts", icon: Landmark, title: "Bank Accounts" },
+      { href: "/dashboard/payins", icon: ArrowDown, title: "Payins" },
+      { href: "/dashboard/payouts", icon: ArrowUp, title: "Payouts" },
       // {
       //   href: "/dashboard/billing",
       //   icon: "billing",
       //   title: "Billing",
       //   authorizeOnly: UserRole.USER,
       // },
-      { href: "/dashboard/webhooks", icon: "fileInput", title: "Webhooks" },
-      { href: "/dashboard/api-keys", icon: "smile", title: "API keys" },
+      { href: "/dashboard/webhooks", icon: Webhook, title: "Webhooks" },
+      { href: "/dashboard/api-keys", icon: KeyRound, title: "API keys" },
       
       // { href: "/dashboard/charts", icon: "lineChart", title: "Charts" },
       // {
@@ -78,9 +79,9 @@ export const sidebarLinks: SidebarNavItem[] = [
   {
     title: "SETTINGS",
     items: [
-      { href: "/dashboard/settings/fees", icon: "settings", title: "Setup fees" }, 
-      { href: "/dashboard/settings/team", icon: "settings", title: "Team" }, 
-      { href: "/dashboard/settings/enviroment", icon: "settings", title: "Enviroment Setup" },
+      { href: "/dashboard/settings/fees", icon: Currency, title: "Setup fees" }, 
+      { href: "/dashboard/settings/team", icon: Users, title: "Team" }, 
+      { href: "/dashboard/settings/enviroment", icon: BugIcon, title: "Enviroment Setup" },
 
       // { href: "/dashboard/settings", icon: "settings", title: "Configurações" },
       // { href: "/dashboard/billing", icon: "creditCard", title: "Cobrança" },
@@ -167,6 +168,7 @@ export default function DashboardSidebar() {
                     )}
                     {section.items.map((item) => {
                       // const Icon = Icons[item.icon || "arrowRight"];
+                      const Icon = item.icon || BugIcon;
                       return (
                         item.href && (
                           <Fragment key={`link-fragment-${item.title}`}>
@@ -183,8 +185,8 @@ export default function DashboardSidebar() {
                                     "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
                                 )}
                               > 
-                              
-                                {/* <Icon className="size-5" /> */}
+                               
+                                <Icon className="size-5" />
                                 {item.title}
                                 {item.badge && (
                                   <Badge className="flex items-center justify-center ml-auto rounded-full size-5 shrink-0">
@@ -208,7 +210,7 @@ export default function DashboardSidebar() {
                                     )}
                                   >
                                     <span className="flex items-center justify-center size-full">
-                                      {/* <Icon className="size-5" /> */}
+                                      <Icon className="size-5" />
                                     </span>
                                   </Link>
                                 </TooltipTrigger>

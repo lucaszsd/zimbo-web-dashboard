@@ -30,7 +30,7 @@ export function UserAccountNav() {
 
   if (!user)
     return (
-      <div className="size-8 animate-pulse rounded-full border bg-muted" />
+      <div className="size-8 w-8 animate-pulse rounded-full border bg-muted" />
     );
 
   // if (isMobile) {
