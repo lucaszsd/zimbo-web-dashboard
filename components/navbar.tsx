@@ -5,9 +5,8 @@ import { useAuth } from './context/firebaseAuth';
 import { UserAccountNav } from './layout/user-account-nav';
 export default function Navbar() {
 
-  const {user   } = useAuth()
-  const router = useRouter();
-  console.log('user', user)
+  const {user } = useAuth()
+  const router = useRouter(); 
   return (
     <header className='w-full p-4  flex justify-between items-center border-b'>
       <div className='w-full flex justify-between items-center  max-w-5xl mx-auto '  >

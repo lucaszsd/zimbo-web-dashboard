@@ -1,8 +1,25 @@
+'use client';
+import { useAuth } from "@/components/context/firebaseAuth";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function BankAccounts() {
+export default  function BankAccounts() {
+
+    const { user } = useAuth();
+
+  console.log('Sarch', JSON.stringify(user));
+  const postData = async () => {
+    
+    
+    // const result = await generateApiKey({companyId: process.env.COMPANY_ID as string, firebaseToken: 'asdas'});
+    // console.log('user', result)
+
+  }
+
+  postData();
+ 
+   
   return (
     <>
       <DashboardHeader

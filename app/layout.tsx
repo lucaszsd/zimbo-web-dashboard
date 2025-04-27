@@ -1,7 +1,7 @@
 import { AuthProvider } from "@/components/context/firebaseAuth";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-
+import { Toaster } from 'sonner';
   
 //TODO: construct metadata
 export const metadata: Metadata = {
@@ -14,12 +14,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en" suppressHydrationWarning className="">
       <head/>
       <AuthProvider>
         <body>
           {children}
+          <Toaster />
         </body>
       </AuthProvider>
     </html>

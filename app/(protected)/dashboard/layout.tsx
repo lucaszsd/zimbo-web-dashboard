@@ -1,9 +1,15 @@
+'use client'
+import { useAuth } from "@/components/context/firebaseAuth";
 import DashboardHeader from "@/components/dashboard/dashboard-nav";
 import DashboardSidebar from "@/components/dashboard/dashboard-sidebar";
-
+import { redirect } from "next/navigation";
 export default function Layout({children}: {children: React.ReactNode}) {
+   
+  const { user } = useAuth();
   
-  // TODO: Redirect
+  if(!user) {  
+    redirect('/sign-in');
+  }
  
   return (
     <div className="relative flex min-h-screen w-full">
