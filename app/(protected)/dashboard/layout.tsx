@@ -1,14 +1,17 @@
 'use client'
-import { useAuth } from "@/components/context/firebaseAuth";
 import DashboardHeader from "@/components/dashboard/dashboard-nav";
 import DashboardSidebar from "@/components/dashboard/dashboard-sidebar";
-import { redirect } from "next/navigation";
+import { auth } from "@/firebase.config";
+import { useRouter } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
 export default function Layout({children}: {children: React.ReactNode}) {
    
-  const { user } = useAuth();
+  const [ user ] =  useAuthState(auth);
+
+  const router = useRouter();
   
-  if(!user) {  
-    redirect('/sign-in');
+  if(!user) {
+    router.push('/sign-in');
   }
  
   return (

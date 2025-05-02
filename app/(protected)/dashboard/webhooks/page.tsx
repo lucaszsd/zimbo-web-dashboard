@@ -7,8 +7,8 @@ export default function Page() {
         heading="Webhooks"
         text="Create and manage webhooks"
       />
-      <div className="grid gap-8">
-        <p>Webhooks</p>
+      <div className="grid gap-8 justify-center">
+        <p>Form</p>
       </div>
     </>
   );

@@ -1,11 +1,13 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { auth } from '@/firebase.config';
 import { useRouter } from 'next/navigation';
-import { useAuth } from './context/firebaseAuth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { UserAccountNav } from './layout/user-account-nav';
 export default function Navbar() {
 
-  const {user } = useAuth()
+  const [ user ] = useAuthState(auth)
+
   const router = useRouter(); 
   return (
     <header className='w-full p-4  flex justify-between items-center border-b'>

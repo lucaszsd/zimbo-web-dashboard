@@ -12,8 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { auth } from "@/firebase.config";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { useAuth } from "../context/firebaseAuth";
+import { signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { UserAvatar } from "./user-avatar";
 
 export function UserAccountNav() {
@@ -25,7 +27,7 @@ export function UserAccountNav() {
     setOpen(false);
   };
 
-  const { user, logOut} =  useAuth()
+  const [ user ]=  useAuthState(auth)
   const { isMobile } = useMediaQuery();
 
   if (!user)
@@ -191,7 +193,7 @@ export function UserAccountNav() {
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault();
-            logOut();
+            signOut(auth);
           }}
         >
           <div className="flex items-center space-x-2.5">
