@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
   
 //TODO: construct metadata
@@ -19,6 +20,7 @@ export default function RootLayout({
         <body>
           {/* <Navbar /> */}
           {children} 
+          <Toaster />
         </body> 
     </html>
   );

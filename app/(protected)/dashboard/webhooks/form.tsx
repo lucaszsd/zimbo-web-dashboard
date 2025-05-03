@@ -1,51 +1,81 @@
-import { Button } from "@/components/ui/button";
+'use client'
+import { webhookConfig } from "@/actions/webhook-config";
+import SaveButton from "@/components/save-button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { auth } from "@/firebase.config";
+import { WebhookSchema, WebhookType } from "@/schemas/webhook";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+
 
 export default function Form() {
+    
+    const [user] = useAuthState(auth)
 
-
-    const {
-        handleSubmit,
-        register,
-        formState: { errors, },
-        getValues,
-        watch,
-        setValue,
-        control, 
-    } = useForm<npsFormType>({
-        resolver: zodResolver(npsFormSchema),
-        defaultValues: {
-            logo: logo,
-            title: DEFAULT_TITLE,
-            description: DEFAULT_DESCRIPTION,  
-            color: DEFAULT_COLORS[3],
-        }
+     
+    
+    const { handleSubmit, register, formState: {errors} } = useForm<WebhookType>({
+        resolver: zodResolver(WebhookSchema),
+        defaultValues: { url: '', events: []},
     })
+    
+    const onSubmit: SubmitHandler<WebhookType> = async (data: WebhookType) => {
+        
+        const parsedData = WebhookSchema.safeParse(data)
+
+        if (!parsedData.success) {
+            toast('Houston, we have a problem', {
+                description: 'Please check the data you provided',
+            })
+        } 
+ 
+        user?.getIdToken().then(async (token) => {
+            const result = await webhookConfig({companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f', firebaseToken: token, webhookUrl: parsedData.data?.url as string })
+            
+            if(result.success){
+                toast.success('Webhook created successfully', {
+                    description: 'You can now use this webhook to observe events' + result.message,
+                })
+            }else{
+                toast.error('Houston, we have a problem', {
+                    description: 'Please check the data you provided' + result.message,
+                })
+            }
+        })
+
+        
+           
+    }
+
   return (
-    <Card>
+    <form onSubmit={handleSubmit(onSubmit)} > 
+    <Card className="w-full">
         <CardHeader>
             <CardTitle>Create webhook</CardTitle>
             <CardDescription>Create a webhook to observe all eventes</CardDescription>
         </CardHeader>
-       <CardContent className='flex flex-col gap-y-5'>
-                <div className='flex flex-col gap-y-2 '>
-                    <Label>
-                        Nome do formulário (Esse nome não será exibido para os clientes)
-                    </Label>
-                    {/* <Input required type='text' name = "cpf" placeholder='123.123.123-23'> */}
-                        <Input   placeholder = {'Formulário natal 2024'} {...register('name')} /> 
-                </div>  
+       <CardContent className='flex flex-col gap-y-5'> 
+            <div className='flex flex-col gap-y-2 '>
+                <Label>
+                    Targeted URL
+                </Label> 
+                <Input placeholder = {'https://www.google.com/webhook'} {...register('url')} /> 
+                {errors.url && <p className="">{errors.url.message}</p>}
+            </div> 
         </CardContent>
-        <CardFooter>
-            <Button variant="outline" className="w-full">
+        <CardFooter className="flex justify-end">
+            {/* <Button variant="outline" className="w-full">
                 Create Webhook
-            </Button>
-            <Button variant="outline" className="w-full">
-                Test Webhook
-            </Button>
+            </Button> */}
+            <SaveButton >
+                Save Webhook
+            </SaveButton>
         </CardFooter>
     </Card>
+    </form>
   )
 }
