@@ -1,4 +1,5 @@
 import { DashboardHeader } from "@/components/dashboard/header";
+import ApiKey from "./apikey";
 
 export default function Page() {
   return (
@@ -9,6 +10,7 @@ export default function Page() {
       />
       <div className="grid gap-8">
         <p>Api Keys</p>
+        <ApiKey />
       </div>
     </>
   );
