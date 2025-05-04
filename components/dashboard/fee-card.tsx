@@ -1,12 +1,38 @@
+'use client'
+import { deleteFee } from "@/actions/delete-fee";
+import { auth } from "@/firebase.config";
 import copyToClipboard from "@/lib/copy-to-clipboard";
 import { FeesType } from "@/schemas/fees";
 import { ArrowDown, ArrowUp, Copy, Edit2, Trash2 } from "lucide-react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Card, CardFooter, CardHeader } from "../ui/card";
 
 export default function FeeCard({id, name, address, payin_percentage_fee, payin_flat_fee, payout_percentage_fee, payout_flat_fee}: FeesType) {
 
+    const [user] = useAuthState(auth)
 
+    const deleteFeeAction = async () => {
+
+        user?.getIdToken().then(async (token) => {
+            const { success, message } = await deleteFee({
+                id: id as string,
+                companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f',
+                firebaseToken: token,
+            })
+
+            if(success){
+                console.log('Fee deleted successfully')
+                toast.success('Fee deleted successfully')
+            } else{ 
+                toast.error('Houston, we have a problem', {
+                    description: 'We had problem deleting this fee, try again later: ' + message,
+                })
+            }
+        })
+        
+    }
    
 
 
@@ -26,7 +52,7 @@ export default function FeeCard({id, name, address, payin_percentage_fee, payin_
                 <Button size={'icon'} className="" variant="ghost">
                     <Edit2 className="" />
                 </Button> 
-                <Button size={'icon'} className="" variant="ghost">
+                <Button size={'icon'} onClick = {deleteFeeAction} variant="ghost" >
                     <Trash2 className="" />
                 </Button>
             </div>  
@@ -45,7 +71,7 @@ export default function FeeCard({id, name, address, payin_percentage_fee, payin_
                         <p className="text-xs text-red-800">Payout fee</p>
                         <ArrowUp className="text-red-800 size-4" />
                     </div>
-                    <p className="text-sm font-semibold">{`${payout_percentage_fee/100}% + ${payin_flat_fee/100}`}</p>
+                    <p className="text-sm font-semibold">{`${payout_percentage_fee/100}% + ${payout_flat_fee/100}`}</p>
                 </div>
             </div>
                 

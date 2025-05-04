@@ -43,10 +43,10 @@ export default function Form() {
                 firebaseToken: token, 
                 name: parsedData.data.name,
                 address: parsedData.data.address,
-                payinpercentage: parsedData.data.payinpercentage,
-                payinfixed: parsedData.data.payinfixed,
-                payoutpercentage: parsedData.data.payoutpercentage,
-                payoutfixed: parsedData.data.payoutfixed,
+                payin_percentage_fee: parsedData.data.payin_percentage_fee,
+                payin_flat_fee: parsedData.data.payin_flat_fee,
+                payout_percentage_fee: parsedData.data.payout_percentage_fee,
+                payout_flat_fee: parsedData.data.payout_flat_fee,
             })
             
             if(result.success){
@@ -91,15 +91,15 @@ export default function Form() {
                     <Label>
                         Payin percentage fee
                     </Label> 
-                    <Input type="number" placeholder={'0.00'} {...register('payinpercentage', { valueAsNumber: true})} /> 
-                    {errors.payinpercentage && <p className="">{errors.payinpercentage.message}</p>}
+                    <Input type="number" placeholder={'0.00'} {...register('payin_percentage_fee', { valueAsNumber: true})} /> 
+                    {errors.payin_percentage_fee && <p className="">{errors.payin_percentage_fee.message}</p>}
                 </div> 
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
                         Payin flat fee
                     </Label> 
-                    <Input type="number" placeholder={'0.00'}{...register('payinfixed', { valueAsNumber: true})} /> 
-                    {errors.payinfixed && <p className="">{errors.payinfixed.message}</p>}
+                    <Input type="number" placeholder={'0.00'}{...register('payin_flat_fee', { valueAsNumber: true})} /> 
+                    {errors.payin_flat_fee && <p className="">{errors.payin_flat_fee.message}</p>}
                 </div> 
             </div>
 
@@ -108,15 +108,15 @@ export default function Form() {
                     <Label>
                         Payout percentage fee
                     </Label> 
-                    <Input type="number" placeholder={'0.00'} {...register('payoutpercentage', { valueAsNumber: true})} /> 
-                    {errors.payoutpercentage && <p className="">{errors.payoutpercentage.message}</p>}
+                    <Input type="number" placeholder={'0.00'} {...register('payout_percentage_fee', { valueAsNumber: true})} /> 
+                    {errors.payout_percentage_fee && <p className="">{errors.payout_percentage_fee.message}</p>}
                 </div> 
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
                         Payout flat fee
                     </Label> 
-                    <Input type="number" placeholder={'0.00'} {...register('payoutfixed', { valueAsNumber: true})} /> 
-                    {errors.payoutfixed && <p className="">{errors.payoutfixed.message}</p>}
+                    <Input type="number" placeholder={'0.00'} {...register('payout_flat_fee', { valueAsNumber: true})} /> 
+                    {errors.payout_flat_fee && <p className="">{errors.payout_flat_fee.message}</p>}
                 </div> 
             </div>
         </CardContent>

@@ -8,7 +8,7 @@ type webhookConfigType = {
 
 type createFeeType = webhookConfigType & FeesType
 
-export async function createFee({address, name, payinpercentage, payinfixed, payoutpercentage, payoutfixed, companyId, firebaseToken}: createFeeType): Promise<ServerResponseType> {
+export async function createFee({address, name, payin_percentage_fee, payin_flat_fee, payout_percentage_fee, payout_flat_fee, companyId, firebaseToken}: createFeeType): Promise<ServerResponseType> {
 
     if (!firebaseToken) {
         return {
@@ -34,12 +34,12 @@ export async function createFee({address, name, payinpercentage, payinfixed, pay
                 companyId: companyId,
             },
             body: JSON.stringify({
-                name: name,
-                address: address, //TODO: add a real address
-                payin_percentage_fee: payinpercentage,
-                payin_flat_fee: payinfixed,
-                payout_percentage_fee: payoutpercentage,
-                payout_flat_fee: payoutfixed,
+                name,
+                address,
+                payin_percentage_fee,
+                payin_flat_fee, 
+                payout_percentage_fee, 
+                payout_flat_fee,
             }),
         });
 
