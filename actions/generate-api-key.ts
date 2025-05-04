@@ -1,5 +1,7 @@
 import { ServerResponseType } from "@/types-and-schemas/server-response";
 
+ 
+
 type generateApiKeyType = {
     companyId: string;
     firebaseToken: string;

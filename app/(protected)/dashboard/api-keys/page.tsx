@@ -5,11 +5,10 @@ export default function Page() {
   return (
     <>
       <DashboardHeader
-        heading="Webhooks"
-        text="Create and manage webhooks"
+        heading="API Keys"
+        text="The API key is used to authenticate your requests."
       />
-      <div className="grid gap-8">
-        <p>Api Keys</p>
+      <div className="grid gap-8"> 
         <ApiKey />
       </div>
     </>

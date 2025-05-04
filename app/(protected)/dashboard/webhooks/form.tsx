@@ -20,7 +20,7 @@ export default function Form() {
     
     const { handleSubmit, register, formState: {errors} } = useForm<WebhookType>({
         resolver: zodResolver(WebhookSchema),
-        defaultValues: { url: '', events: []},
+        defaultValues: { webhookUrl: '', events: []},
     })
     
     const onSubmit: SubmitHandler<WebhookType> = async (data: WebhookType) => {
@@ -34,7 +34,7 @@ export default function Form() {
         } 
  
         user?.getIdToken().then(async (token) => {
-            const result = await webhookConfig({companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f', firebaseToken: token, webhookUrl: parsedData.data?.url as string })
+            const result = await webhookConfig({companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f', firebaseToken: token, webhookUrl: parsedData.data?.webhookUrl as string })
             
             if(result.success){
                 toast.success('Webhook created successfully', {
@@ -53,29 +53,29 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} > 
-    <Card className="w-full">
-        <CardHeader>
-            <CardTitle>Create webhook</CardTitle>
-            <CardDescription>Create a webhook to observe all eventes</CardDescription>
-        </CardHeader>
-       <CardContent className='flex flex-col gap-y-5'> 
-            <div className='flex flex-col gap-y-2 '>
-                <Label>
-                    Targeted URL
-                </Label> 
-                <Input placeholder = {'https://www.google.com/webhook'} {...register('url')} /> 
-                {errors.url && <p className="">{errors.url.message}</p>}
-            </div> 
-        </CardContent>
-        <CardFooter className="flex justify-end">
-            {/* <Button variant="outline" className="w-full">
-                Create Webhook
-            </Button> */}
-            <SaveButton >
-                Save Webhook
-            </SaveButton>
-        </CardFooter>
-    </Card>
+        <Card className="w-full">
+            <CardHeader>
+                <CardTitle>Create webhook</CardTitle>
+                <CardDescription>Create a webhook to observe all eventes</CardDescription>
+            </CardHeader>
+        <CardContent className='flex flex-col gap-y-5'> 
+                <div className='flex flex-col gap-y-2 '>
+                    <Label>
+                        Targeted URL
+                    </Label> 
+                    <Input placeholder = {'https://www.google.com/webhook'} {...register('webhookUrl')} /> 
+                    {errors.webhookUrl && <p className="">{errors.webhookUrl.message}</p>}
+                </div> 
+            </CardContent>
+            <CardFooter className="flex justify-end">
+                {/* <Button variant="outline" className="w-full">
+                    Create Webhook
+                </Button> */}
+                <SaveButton >
+                    Save Webhook
+                </SaveButton>
+            </CardFooter>
+        </Card>
     </form>
   )
 }

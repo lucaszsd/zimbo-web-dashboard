@@ -35,8 +35,7 @@ export default function NewForm() {
     <div>NewForm
         <Button onClick={() => newAccount()}>
             Create Account
-        </Button>
-
+        </Button> 
         {<pre>{JSON.stringify(data, null, 2)}</pre>}
     </div>
   )
