@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { auth } from "@/firebase.config";
-import { WebhookSchema, WebhookType } from "@/schemas/webhook";
+import { WebhookSchema, WebhookType } from "@/types-and-schemas/webhook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { SubmitHandler, useForm } from "react-hook-form";

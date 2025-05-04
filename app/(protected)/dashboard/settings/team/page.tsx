@@ -5,11 +5,11 @@ export default async function Page() {
   return (
     <>
       <DashboardHeader
-        heading="Enviroment"
-        text="Manage development enviroment"
+        heading="Team"
+        text="Manage team members and permissions"
       />
       <div className="grid gap-8">
-        <p>Team</p> 
+        <p>Coming Soon</p> 
       </div>
     </>
   );

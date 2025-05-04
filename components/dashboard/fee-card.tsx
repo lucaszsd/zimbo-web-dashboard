@@ -2,7 +2,7 @@
 import { deleteFee } from "@/actions/delete-fee";
 import { auth } from "@/firebase.config";
 import copyToClipboard from "@/lib/copy-to-clipboard";
-import { FeesType } from "@/schemas/fees";
+import { FeesType } from "@/types-and-schemas/fees";
 import { ArrowDown, ArrowUp, Copy, Edit2, Trash2 } from "lucide-react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "sonner";

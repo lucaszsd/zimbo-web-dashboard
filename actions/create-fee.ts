@@ -1,5 +1,5 @@
-import { FeesType } from "@/schemas/fees";
-import { ServerResponseType } from "@/schemas/server-response";
+import { FeesType } from "@/types-and-schemas/fees";
+import { ServerResponseType } from "@/types-and-schemas/server-response";
 
 type webhookConfigType = {
     companyId: string;

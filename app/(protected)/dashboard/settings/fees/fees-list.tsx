@@ -2,7 +2,7 @@
 import { getFees } from "@/actions/get-fees";
 import FeeCard from "@/components/dashboard/fee-card";
 import { auth } from "@/firebase.config";
-import { FeesType } from "@/schemas/fees";
+import { FeesType } from "@/types-and-schemas/fees";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -10,7 +10,7 @@ export default function FeesList() {
 
     const [ fees, setFees ] = useState<FeesType[] | []>([]);
 
-    const [user, setUser] = useAuthState(auth);
+    const [ user ] = useAuthState(auth);
 
     useEffect(() => {
 

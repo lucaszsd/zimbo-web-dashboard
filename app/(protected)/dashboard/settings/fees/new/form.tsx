@@ -1,11 +1,12 @@
 'use client'
 import { createFee } from "@/actions/create-fee";
+import ErrorMessage from "@/components/dashboard/error-message";
 import SaveButton from "@/components/save-button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { auth } from "@/firebase.config";
-import { FeesSchema, FeesType } from "@/schemas/fees";
+import { FeesSchema, FeesType } from "@/types-and-schemas/fees";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -18,14 +19,13 @@ export default function Form() {
 
      
     
-    const { handleSubmit, register, formState: {errors} } = useForm<FeesType>({
+    const { handleSubmit, register, formState: {errors }, watch } = useForm<FeesType>({
         resolver: zodResolver(FeesSchema),
         defaultValues: { },
     })
     
     const onSubmit: SubmitHandler<FeesType> = async (data: FeesType) => {
-        
-    
+         
         const parsedData = FeesSchema.safeParse(data)
 
         if (!parsedData.success) {
@@ -77,46 +77,46 @@ export default function Form() {
                     Fee name 
                 </Label> 
                 <Input placeholder = {'Default fee'} {...register('name')} /> 
-                {errors.name && <p className="">{errors.name.message}</p>}
+                {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
             </div> 
              <div className='flex flex-col gap-y-2 '>
                 <Label>
                     Crypto wallet address (EVM)
                 </Label> 
                 <Input placeholder = {'0x0BECD88f20F83916cb57A27EAbaEcCdd874cbA18'} {...register('address')} /> 
-                {errors.address && <p className="">{errors.address.message}</p>}
+                {errors.address && <ErrorMessage>{errors.address.message}</ErrorMessage>}
             </div> 
             <div className="flex flex-row gap-x-5">
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
-                        Payin percentage fee
+                        Payin percentage fee ({watch('payin_percentage_fee')/100 || 0}%)
                     </Label> 
                     <Input type="number" placeholder={'0.00'} {...register('payin_percentage_fee', { valueAsNumber: true})} /> 
-                    {errors.payin_percentage_fee && <p className="">{errors.payin_percentage_fee.message}</p>}
+                    {errors.payin_percentage_fee && <ErrorMessage>{errors.payin_percentage_fee.message}</ErrorMessage>}
                 </div> 
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
-                        Payin flat fee
+                        Payin flat fee ({(watch('payin_flat_fee')/100).toFixed(2) || 0})
                     </Label> 
-                    <Input type="number" placeholder={'0.00'}{...register('payin_flat_fee', { valueAsNumber: true})} /> 
-                    {errors.payin_flat_fee && <p className="">{errors.payin_flat_fee.message}</p>}
+                    <Input type="number" defaultValue={0} placeholder={'0.00'}{...register('payin_flat_fee', { valueAsNumber: true})} /> 
+                    {errors.payin_flat_fee && <ErrorMessage>{errors.payin_flat_fee.message}</ErrorMessage>}
                 </div> 
             </div>
 
             <div className="flex flex-row gap-x-5">
-                <div className='flex flex-col gap-y-2 '>
+                <div className='flex flex-col gap-y-2  '>
                     <Label>
-                        Payout percentage fee
+                        Payout percentage fee ({(watch('payout_percentage_fee')/100) || 0}%)
                     </Label> 
                     <Input type="number" placeholder={'0.00'} {...register('payout_percentage_fee', { valueAsNumber: true})} /> 
-                    {errors.payout_percentage_fee && <p className="">{errors.payout_percentage_fee.message}</p>}
+                    {errors.payout_percentage_fee && <ErrorMessage>{errors.payout_percentage_fee.message}</ErrorMessage>}
                 </div> 
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
-                        Payout flat fee
+                        Payout flat fee ({(watch('payout_flat_fee')/100).toFixed(2) || 0})
                     </Label> 
-                    <Input type="number" placeholder={'0.00'} {...register('payout_flat_fee', { valueAsNumber: true})} /> 
-                    {errors.payout_flat_fee && <p className="">{errors.payout_flat_fee.message}</p>}
+                    <Input type="number" defaultValue={0} placeholder={'0.00'} {...register('payout_flat_fee', { valueAsNumber: true})} /> 
+                    {errors.payout_flat_fee && <ErrorMessage>{errors.payout_flat_fee.message}</ErrorMessage>}
                 </div> 
             </div>
         </CardContent>

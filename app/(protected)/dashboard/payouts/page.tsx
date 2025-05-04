@@ -1,6 +1,7 @@
 import { DashboardHeader } from "@/components/dashboard/header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Form from "./form";
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
       </DashboardHeader>
       <div className="grid gap-8">
         <p>Payouts</p>
+        <Form />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { WebhookType } from '@/schemas/webhook'
+import { WebhookType } from '@/types-and-schemas/webhook'
 import { Copy, Trash2 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'

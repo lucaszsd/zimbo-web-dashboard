@@ -1,4 +1,4 @@
-import { ServerResponseType } from "@/schemas/server-response";
+import { ServerResponseType } from "@/types-and-schemas/server-response";
 
 type clientConfigType = {
     companyId: string;

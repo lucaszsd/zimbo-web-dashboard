@@ -35,6 +35,22 @@ export default function ApiKey() {
 
     }, [])
 
+
+    const handleCopy = () => {
+        if (apiKey) {
+            navigator.clipboard.writeText(apiKey)
+            toast.success('API Key copied to clipboard', {
+                description: 'You can now use it to authenticate your requests',
+                richColors: true,
+            })
+        } else {
+            toast.error('API Key not found', {
+                description: 'Please try again later',
+                richColors: true,
+            })
+        }
+    }
+
   return (
     <div>
         <Card className="w-full max-w-2xl mx-auto">
@@ -44,7 +60,7 @@ export default function ApiKey() {
             </CardHeader>
             <CardContent className="flex flex-row gap-x-2 items-center">
                 <p>{apiKey}</p>
-                <Button>
+                <Button variant={'ghost'} onClick={handleCopy}>
                 <Copy className="" />
                 </Button>
             </CardContent>

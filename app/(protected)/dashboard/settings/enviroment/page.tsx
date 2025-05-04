@@ -8,7 +8,9 @@ export default function Page() {
         text="Manage development enviroment"
       />
       <div className="grid gap-8">
-        <p>Enviroment</p>
+        <p>Instance name</p>
+        <p>Features</p>
+        <p>Delete instance</p>
       </div>
     </>
   );
