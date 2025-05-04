@@ -13,17 +13,14 @@ export default function FeeCard({id, name, address, payin_percentage_fee, payin_
 
     const [user] = useAuthState(auth)
 
-    const deleteFeeAction = async () => {
-
+    const deleteFeeAction = async () => { 
         user?.getIdToken().then(async (token) => {
             const { success, message } = await deleteFee({
                 id: id as string,
                 companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f',
                 firebaseToken: token,
-            })
-
-            if(success){
-                console.log('Fee deleted successfully')
+            })  
+            if(success){ 
                 toast.success('Fee deleted successfully')
             } else{ 
                 toast.error('Houston, we have a problem', {

@@ -1,6 +1,7 @@
 import { DashboardHeader } from "@/components/dashboard/header";
-
-export default function Page() {
+ 
+export default async function Page() {
+ 
   return (
     <>
       <DashboardHeader
@@ -8,7 +9,7 @@ export default function Page() {
         text="Manage development enviroment"
       />
       <div className="grid gap-8">
-        <p>Team</p>
+        <p>Team</p> 
       </div>
     </>
   );

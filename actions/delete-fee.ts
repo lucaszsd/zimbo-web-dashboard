@@ -10,7 +10,7 @@ type deleteFee = webhookConfigType & {
 }
 
 export async function deleteFee({id, companyId, firebaseToken}: deleteFee): Promise<ServerResponseType> {
-
+    
     if (!firebaseToken) {
         return {
             success: false,
@@ -36,14 +36,14 @@ export async function deleteFee({id, companyId, firebaseToken}: deleteFee): Prom
                 companyId: companyId,
             }, 
         });
-
+        console.log('Delete fee response', JSON.stringify(data), data.status)
+        
         return {
             success: true,
-            data: await data.json(),
+            data: JSON.stringify(data),
             message: "Fee deleted successfully",
         } 
     }catch (error) {
-        console.log('Error delete ', JSON.stringify(error))
         return {
             success: false,
             message: JSON.stringify(error),
