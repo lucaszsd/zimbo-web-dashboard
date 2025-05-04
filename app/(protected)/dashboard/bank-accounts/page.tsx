@@ -2,7 +2,7 @@
 import { generateApiKey } from "@/actions/generate-api-key";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/firebase";
+import { auth } from "@/firebase.config";
 import Link from "next/link";
 import { useState } from "react";
 import { useIdToken } from "react-firebase-hooks/auth";
