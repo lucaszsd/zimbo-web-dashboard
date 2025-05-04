@@ -22,22 +22,19 @@ export default function BankAccounts() {
   const handleSignIn =  async () => {
     
 
-    user?.getIdToken().then((token) => { 
-      // setData(token)
-      console.log('Token => ', token)
+    user?.getIdToken().then((token) => {  
       generateApiKey({
         companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f',
         firebaseToken: token
       }).then((res) => {
         setData(JSON.stringify(res))
       })
-     })
+     }, [])
      
 
   }
   
-  handleSignIn( )
-  
+ 
   
    
   return (

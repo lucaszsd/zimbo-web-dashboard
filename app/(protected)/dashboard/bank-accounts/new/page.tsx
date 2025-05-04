@@ -1,7 +1,6 @@
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
-import { Card } from "@/components/ui/card";
-import Form from "./form";
+import NewForm from "./newForm";
 
 export default function NewPayoutAccount() {
  
@@ -13,13 +12,7 @@ export default function NewPayoutAccount() {
         text="Add new payout account"
       />
       <div>
-        {/* <p>Nova transação</p> */}
-        <pre>
-        
-        </pre>
-        <Card className="max-w-[800px] mx-auto">
-            <Form />
-        </Card>
+        <NewForm />
       </div>
     </DashboardShell>
   )
