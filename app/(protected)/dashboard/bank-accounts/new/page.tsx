@@ -1,6 +1,6 @@
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
-import NewForm from "./newForm";
+import Form from "./form";
 
 export default function NewPayoutAccount() {
  
@@ -11,8 +11,8 @@ export default function NewPayoutAccount() {
         heading="Add payout account"
         text="Add new payout account"
       />
-      <div>
-        <NewForm />
+      <div className="w-full max-w-2xl space-y-4 mx-auto">
+        <Form />
       </div>
     </DashboardShell>
   )

@@ -36,17 +36,10 @@ export async function createPixAccount({fiatAccountSchema, data, companyToken}: 
             },
             body: JSON.stringify({
                 fiatAccountSchema: fiatAccountSchema,
-                data: {
-                    institutionName: data.institutionName,
-                    accountName: data.accountName,
-                    fiatAccountType: data.fiatAccountType,
-                    keyType: data.keyType,
-                    key: data.key,
-                }
+                data: data
             })
         });
-
-        console.log("data", result);
+ 
         return {
             success: true,
             data: await result.json(),

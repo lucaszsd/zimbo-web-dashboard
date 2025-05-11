@@ -1,11 +1,13 @@
 'use client'; 
-import { generateApiKey } from "@/actions/generate-api-key";
+import { getPixAccount } from "@/actions/get-pix-accounts";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/firebase.config";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIdToken } from "react-firebase-hooks/auth";
+import { columns } from "./table/columns";
+import { DataTable } from "./table/table";
 
 export default function BankAccounts() {
 
@@ -15,24 +17,19 @@ export default function BankAccounts() {
   // const { user } = useAuth()
 
   const [user, loading, error] =  useIdToken(auth);
-  const [data, setData] = useState('Nat');
+  const [data, setData] = useState([]);
+ 
 
-  console.log('idToken', user?.getIdToken())
-
-  const handleSignIn =  async () => {
-    
-
-    user?.getIdToken().then((token) => {  
-      generateApiKey({
-        companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f',
-        firebaseToken: token
-      }).then((res) => {
-        setData(JSON.stringify(res))
+  useEffect(() => {
+    getPixAccount({ companyToken: 'bdd7aae6-13da-4663-a306-758a8715fe82' })
+      .then(({data}) => {
+        console.log('Pix Account', res)
+        setData(data?.BankAccount)
       })
-     }, [])
-     
-
-  }
+      .catch((err) => {
+        console.log('Error', err)
+      })
+  })
   
  
   
@@ -50,9 +47,10 @@ export default function BankAccounts() {
       <div className="grid gap-8">
          <div>
           <p>Nova transação</p>
-          {JSON.stringify(data)}
+          {/* {JSON.stringify(data)}
           {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
+          {error && <p>Error: {error.message}</p>} */}
+          <DataTable columns={columns} data={data}/>
          </div>
       </div>
     </>
