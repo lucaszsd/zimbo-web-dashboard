@@ -1,5 +1,6 @@
 'use client'
 
+import { generateApiKey } from "@/actions/generate-api-key"
 import { getClientConfig } from "@/actions/get-client-config"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -50,9 +51,28 @@ export default function ApiKey() {
         }
     }
 
-    const handleRegenerateKey = () => {
+    const handleRegenerateKey = () => { 
         setStatus('loading')
-        setStatus('success')
+        
+        user?.getIdToken().then(async (token) => {
+
+            const { success, data, message} = await generateApiKey({companyId: 'edb94301-097f-41c9-8a1e-e78138981a4f', firebaseToken: token, webhookUrl: ''})
+
+            if(success){ 
+                setStatus('success') 
+                setApiKey(data?.apiKey as string)
+                toast.success('API Key generated successfully', {
+                    description: 'You can now use it to authenticate your requests',
+                    richColors: true,
+                })
+            }else{
+                setStatus('error')
+                toast.error('Houston, we have a problem', {
+                    description: 'Please check the data you provided: ' + message, richColors: true,
+                })
+            }
+            
+        })   
     }
 
   return (
@@ -77,6 +97,7 @@ export default function ApiKey() {
             </CardContent>
 
         </Card>
+
     </div>
   )
 }
