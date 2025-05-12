@@ -62,7 +62,7 @@ export default function ApiKey() {
                 setStatus('success') 
                 setApiKey(data?.apiKey as string)
                 toast.success('API Key generated successfully', {
-                    description: 'You can now use it to authenticate your requests',
+                    description: 'You can now use it to authenticate your requests with the new key',
                     richColors: true,
                 })
             }else{
@@ -84,7 +84,7 @@ export default function ApiKey() {
                     <CardDescription className="text-sm text-muted-foreground">This is your API key. Use it to authenticate your requests.</CardDescription>
                 </div> 
                 <Button variant={'ghost'} onClick={() => handleRegenerateKey()} className="group">
-                    <RefreshCcw className="group-hover:-rotate-180 duration-500 " />
+                    <RefreshCcw className="group-hover:-rotate-180 duration-500" />
                 </Button>
             </CardHeader>
             <CardContent className="flex flex-row gap-x-2 items-center">
