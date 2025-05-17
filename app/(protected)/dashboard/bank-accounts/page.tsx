@@ -35,14 +35,8 @@ export default function BankAccounts() {
           <Button>New Payout Account</Button>
         </Link>
       </DashboardHeader>
-      <div className="grid gap-8">
-         <div>
-          {/* <p>Nova transação</p> */}
-          {/* {JSON.stringify(data)} */}
-          {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-          <DataTable columns={columns} data={data}/>
-         </div>
+      <div className="grid gap-8">  
+        <DataTable columns={columns} data={data}/> 
       </div>
     </>
   );

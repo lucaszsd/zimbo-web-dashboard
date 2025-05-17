@@ -33,12 +33,13 @@ export const columns: ColumnDef<Account>[] = [
 //     header: "Status",
 //   },
   {
-    accessorKey: "createdAt",
-    header: "Data",
+    accessorKey: "fiatAccountId",
+    header: "Account ID",
     // cell: ({ row }) => {
     //   return new Date(row.original.createdAt).toLocaleDateString() + ' - ' + new Date(row.original.createdAt).toLocaleTimeString()
     // }
   },
+  // },
   {
     accessorKey: "accountName",
     header: "Account name",
@@ -49,7 +50,6 @@ export const columns: ColumnDef<Account>[] = [
   {
     accessorKey: "pixKey",
     header: "Pix Key",
-    
   },
   // {
   //   accessorKey: "institutionName",
@@ -63,7 +63,10 @@ export const columns: ColumnDef<Account>[] = [
  
   {
     accessorKey: "country",
-    header: "country", 
+    header: "Country", 
+    cell: ({ row }) => {
+      return (<img src={`/flags/BR.svg`} alt={row.original.country} className="size-5 rounded-full" />)
+    }
   }, 
 
 
