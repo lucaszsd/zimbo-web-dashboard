@@ -10,30 +10,21 @@ import { columns } from "./table/columns";
 import { DataTable } from "./table/table";
 
 export default function BankAccounts() {
-
-  console.log('Auth', auth.currentUser)
  
-  //  const { data: session } = useSession(); 
-  // const { user } = useAuth()
-
-  const [user, loading, error] =  useIdToken(auth);
+  const [ loading, error] =  useIdToken(auth);
   const [data, setData] = useState([]);
- 
-
+  
   useEffect(() => {
-    getPixAccount({ companyToken: 'aed764db-1af7-47a6-aadd-2984a71bd60b' })
+    getPixAccount({ companyToken: '716a0432-de30-4d81-8b08-70f2366f5878' })
       .then(({data}) => {
-        console.log('Pix Account', res)
+        console.log('Pix Account', data)
         setData(data?.BankAccount)
       })
       .catch((err) => {
         console.log('Error', err)
       })
   })
-  
- 
-  
-   
+    
   return (
     <>
       <DashboardHeader
@@ -46,8 +37,8 @@ export default function BankAccounts() {
       </DashboardHeader>
       <div className="grid gap-8">
          <div>
-          <p>Nova transação</p>
-          {JSON.stringify(data)}
+          {/* <p>Nova transação</p> */}
+          {/* {JSON.stringify(data)} */}
           {loading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
           <DataTable columns={columns} data={data}/>

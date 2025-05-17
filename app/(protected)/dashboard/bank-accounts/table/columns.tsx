@@ -11,6 +11,7 @@ export type Account = {
   
   createdAt?: string;
   accountName: string;
+  pixKey: string;
   institutionName: string;
   fiatAccountType: string;
   fiatAccountSchema: string;
@@ -46,18 +47,20 @@ export const columns: ColumnDef<Account>[] = [
     // }
   },
   {
-    accessorKey: "institutionName",
-    header: "Institution name",
+    accessorKey: "pixKey",
+    header: "Pix Key",
     
   },
-   {
-    accessorKey: "fiatAccountType",
-    header: "Institution name", 
-  },
-  {
-    accessorKey: "fiatAccountSchema",
-    header: "fiat account schema", 
-  }, 
+  // {
+  //   accessorKey: "institutionName",
+  //   header: "Institution name",
+    
+  // },
+  // {
+  //   accessorKey: "fiatAccountType",
+  //   header: "Institution name", 
+  // },
+ 
   {
     accessorKey: "country",
     header: "country", 

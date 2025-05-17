@@ -1,23 +1,8 @@
 
 
 import { ServerResponseType } from "@/types-and-schemas/server-response";
-
-type apiKeyType = {
-    companyToken: string;
-}
-
-type pixAccount = apiKeyType & {
-    fiatAccountSchema: string;
-    data: {
-        institutionName: string;
-        accountName: string;
-        fiatAccountType: string;
-        keyType: string;
-        key: string; 
-    }
-}
-
-export async function getPixAccount({ companyToken }: pixAccount): Promise<ServerResponseType> {
+ 
+export async function getPixAccount({ companyToken }: {companyToken: string}): Promise<ServerResponseType> {
 
     if (!companyToken) {
         return {
