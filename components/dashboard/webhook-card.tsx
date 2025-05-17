@@ -15,11 +15,17 @@ export default function WebhookCard({webhookUrl, webhookSecret, events = []}: We
             richColors: true,
         })
     } else {
-        toast.error('Webhook secret not found', {
+        toast.error('Error deleting webhook', {
             description: 'Please try again later',
             richColors: true,
         })
     }
+  }
+
+  const handleDelete = () => {
+        toast('At the moment, deleting webhooks is not supported', {
+            description: 'You can overwrite the webhook by creating a new one',
+    })
   }
 
   return (
@@ -38,7 +44,7 @@ export default function WebhookCard({webhookUrl, webhookSecret, events = []}: We
             </div>
         </CardHeader>
         <CardFooter className="flex justify-end">
-        <Button onClick={ () => handleCopy()}>
+        <Button onClick={ () => handleDelete()}>
             <Trash2 />
         Delete webhook</Button>
         <Button onClick={() => handleCopy()}  variant="outline" className="ml-2">

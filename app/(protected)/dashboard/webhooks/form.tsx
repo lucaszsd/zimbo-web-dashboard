@@ -39,7 +39,7 @@ export default function Form() {
             if(result.success){
                 toast.success('Webhook created successfully', {
                     description: 'You can now use this webhook to observe events' + result.message,
-                })
+                }) 
             }else{
                 toast.error('Houston, we have a problem', {
                     description: 'Please check the data you provided' + result.message,

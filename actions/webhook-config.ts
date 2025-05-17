@@ -1,4 +1,6 @@
+'use server'
 import { ServerResponseType } from "@/types-and-schemas/server-response";
+import { revalidatePath } from "next/cache";
 
 type webhookConfigType = {
     companyId: string;
@@ -30,7 +32,8 @@ export async function webhookConfig({companyId, firebaseToken, webhookUrl}: webh
                 webhookEnabled: true,
             })
         });
-
+ 
+        revalidatePath('/dashboard/webhooks')
         return {
             success: true,
             data: await data.json(),

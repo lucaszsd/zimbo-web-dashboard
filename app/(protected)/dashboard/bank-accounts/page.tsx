@@ -21,7 +21,7 @@ export default function BankAccounts() {
  
 
   useEffect(() => {
-    getPixAccount({ companyToken: 'bdd7aae6-13da-4663-a306-758a8715fe82' })
+    getPixAccount({ companyToken: 'aed764db-1af7-47a6-aadd-2984a71bd60b' })
       .then(({data}) => {
         console.log('Pix Account', res)
         setData(data?.BankAccount)
@@ -47,9 +47,9 @@ export default function BankAccounts() {
       <div className="grid gap-8">
          <div>
           <p>Nova transação</p>
-          {/* {JSON.stringify(data)}
+          {JSON.stringify(data)}
           {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>} */}
+          {error && <p>Error: {error.message}</p>}
           <DataTable columns={columns} data={data}/>
          </div>
       </div>

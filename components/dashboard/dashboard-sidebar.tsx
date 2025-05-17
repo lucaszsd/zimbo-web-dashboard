@@ -1,7 +1,7 @@
 'use client'
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { ArrowDown, ArrowUp, Badge, BookText, BugIcon, Currency, KeyRound, Landmark, LayoutDashboard, LucideIcon, PanelLeftClose, PanelRightClose, User, Users, Webhook } from 'lucide-react';
+import { ArrowUp, Badge, BookText, BugIcon, Currency, KeyRound, Landmark, LucideIcon, PanelLeftClose, PanelRightClose, Webhook } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -33,11 +33,11 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "MENU",
     items: [
      
-      { href: "/dashboard", icon: LayoutDashboard, title: "Dashboard" },
-      { href: "/dashboard/customers", icon: User, title: "Customers" },
-       { href: "/dashboard/bank-accounts", icon: Landmark, title: "Bank Accounts" },
-      { href: "/dashboard/payins", icon: ArrowDown, title: "Payins" },
+      // { href: "/dashboard", icon: LayoutDashboard, title: "Dashboard" },
+      // { href: "/dashboard/customers", icon: User, title: "Customers" },
+      // { href: "/dashboard/payins", icon: ArrowDown, title: "Payins" },
       { href: "/dashboard/payouts", icon: ArrowUp, title: "Payouts" },
+      { href: "/dashboard/bank-accounts", icon: Landmark, title: "Bank Accounts" },
       // {
       //   href: "/dashboard/billing",
       //   icon: "billing",
@@ -80,8 +80,8 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "SETTINGS",
     items: [
       { href: "/dashboard/settings/fees", icon: Currency, title: "Setup fees" }, 
-      { href: "/dashboard/settings/team", icon: Users, title: "Team" }, 
-      { href: "/dashboard/settings/enviroment", icon: BugIcon, title: "Enviroment Setup" },
+      // { href: "/dashboard/settings/team", icon: Users, title: "Team" }, 
+      // { href: "/dashboard/settings/enviroment", icon: BugIcon, title: "Enviroment Setup" },
 
       // { href: "/dashboard/settings", icon: "settings", title: "Configurações" },
       // { href: "/dashboard/billing", icon: "creditCard", title: "Cobrança" },
