@@ -68,8 +68,8 @@ export default function Form() {
     // const setTitleAction = BankAccountStore((state) => state.setTitle)
     const type = formState.type
     const update = (info:string) =>{
-        alert('update' + info)
-        console.log('update', info)
+        // alert('update' + info)
+        // console.log('update', info)
         setTypeAction(info)
     }
 
@@ -83,9 +83,9 @@ export default function Form() {
   return (
     
         <Card className="w-full"> 
-        <pre>
+        {/* <pre>
             {JSON.stringify(formState, null, 2)}
-        </pre>
+        </pre> */}
             <CardHeader>
                 <CardTitle>
                     Account
@@ -176,18 +176,18 @@ const AddPixAccount = () => {
 
             return 0
         }  
-
+ 
         const result = await createPixAccount({
-            companyToken: 'bdd7aae6-13da-4663-a306-758a8715fe82',
+            companyToken: '716a0432-de30-4d81-8b08-70f2366f5878',
             fiatAccountSchema: 'PIXAccount',
             data: {
                 institutionName: "PIX Bank",
-                accountName: "bacen",
+                accountName: parsed_data.data.accountName as string,
                 fiatAccountType: "BankAccount",
                 keyType: parsed_data.data.keyType as string,
                 key: parsed_data.data.key as string,
             }})
-
+ 
         if (result.success) {
             toast('Pix account created successfully', {
                 description: 'Pix account created successfully',
@@ -229,11 +229,19 @@ const AddPixAccount = () => {
             </div> 
             <div className='flex flex-col gap-y-2'>
                 <Label>
+                    {`Account name (Its a way to identify the account)`}
+                </Label>  
+                <Input placeholder = {'Account Name'} {...register('accountName')}/>  
+                {errors.accountName && <ErrorMessage>{errors.accountName.message}</ErrorMessage>}
+            </div>   
+            <div className='flex flex-col gap-y-2'>
+                <Label>
                     {`PIX key ${type !== '' ? `(${type})` : ''}`}
                 </Label>  
                 <Input    placeholder = {'Pix key'} {...register('key')}/>  
                 {errors.key && <ErrorMessage>{errors.key.message}</ErrorMessage>}
-            </div>   
+            </div>
+
             <CardFooter className='flex justify-between py-4'>
                 <Link href={"/dashboard/bank-accounts"}>
                 <Button variant={"destructive"} className='py-3 text-white rounded-md'>

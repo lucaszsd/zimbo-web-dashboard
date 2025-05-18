@@ -36,6 +36,7 @@ export default function BankAccounts() {
         </Link>
       </DashboardHeader>
       <div className="grid gap-8">  
+        {/* {JSON.stringify(data)} */}
         <DataTable columns={columns} data={data}/> 
       </div>
     </>

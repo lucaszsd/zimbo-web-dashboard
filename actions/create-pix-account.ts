@@ -39,13 +39,21 @@ export async function createPixAccount({fiatAccountSchema, data, companyToken}: 
                 data: data
             })
         });
- 
-        return {
-            success: true,
-            data: await result.json(),
-            message: "Pix account saved successfully",
-        }
 
+        if (!result.ok) {
+            return {
+                success: false,
+                message: "Error creating pix account",
+                data: await result.json(),
+            }
+        }else{
+            return {
+                success: true,
+                data: await result.json(),
+                message: "Pix account saved successfully",
+            }
+        }
+  
     }catch (error) {
         return {
             success: false,
@@ -53,6 +61,6 @@ export async function createPixAccount({fiatAccountSchema, data, companyToken}: 
         };
     }
 
-
+  
 }
 

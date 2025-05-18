@@ -85,6 +85,9 @@ function Selector({setValue}: SelectorProps) {
           {
             Object.entries(account_types).map(([key, value]) => (
               <DropdownMenuRadioItem key={key} value={key}>
+                <img src={`/flags/${value.icon}`} alt="flag" className="rounded-full" width={20} height={20} /> 
+                {/* <Image src={`/flags/${value.icon}`} alt="flag" className="rounded-full" width={20} height={20} />  */}
+                {/* <p className="text-xs">{title}</p> */}
                 {value.name}
                 {/* {value.icon} */}
               </DropdownMenuRadioItem>
