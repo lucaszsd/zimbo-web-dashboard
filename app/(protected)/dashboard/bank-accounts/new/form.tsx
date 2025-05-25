@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import Selector from "../../payouts/new/selector";
+import Selector from "./selector";
  
 import { createPixAccount } from "@/actions/create-pix-account";
 import ErrorMessage from "@/components/dashboard/error-message";

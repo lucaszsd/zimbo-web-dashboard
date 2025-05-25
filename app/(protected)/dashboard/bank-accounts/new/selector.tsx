@@ -9,71 +9,65 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { ChevronsUpDown } from "lucide-react"
+import Image from "next/image"
 import * as React from "react"
-
-type Option = {
-  name: string;
-  id: string; //ID of the option
-  icon?: string; //Address of the icon
-  available?: boolean; //If the option is available
-}
-
 type SelectorProps = {
   title?: string,
-  options: Option[]
-  setValue: (value: string) => void //Callback function to set the value
+  options?: string[]
+  setValue: (value: string) => void 
 }
 
 //Needs to be inside a Tooltip provider
-function CustomSelector({title, options, setValue}: SelectorProps) {
+function Selector({setValue}: SelectorProps) {
 
-  // const account_types = {
-  //   'pix': {
-  //       name: "Pix",
-  //       icon: "br.svg", 
-  //       available: true,  
-  //   },
-  //   'sepa': {
-  //       name: "Sepa",
-  //       icon: "eu.svg", 
-  //         available: false,  
-  //   },
-  //   'wire': {
-  //       name: "Wire",
-  //       icon: "us.svg", 
-  //         available: false,  
-  //   },
-  //   'uk_faster_payment': {
-  //       name: "Faster Payments",
-  //       icon: "gb.svg",
-  //         available: false,  
-  //   },
-  // }
-  
-  const [method, setMethod] = React.useState<string>(options[0].id) //Default value is the first option
-  
-  const updateValue = (name: string) => {
-    setMethod(name)
-    setValue(name) 
+  const account_types = {
+    'pix': {
+        name: "Pix",
+        icon: "br.svg", 
+        available: true,  
+    },
+    'sepa': {
+        name: "Sepa",
+        icon: "eu.svg", 
+          available: false,  
+    },
+    'wire': {
+        name: "Wire",
+        icon: "us.svg", 
+          available: false,  
+    },
+    'uk_faster_payment': {
+        name: "Faster Payments",
+        icon: "gb.svg",
+          available: false,  
+    },
   }
+
+  const [method, setMethod] = React.useState<keyof typeof account_types>(Object.keys(account_types)[0] as keyof typeof account_types)
+  
+    const updateValue = (value: keyof typeof account_types) => {
+      setMethod(value)
+      setValue(value) 
+    }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild> 
         <div className="p-2 border rounded-md flex flex-row space-between items-center justify-between hover:bg-gray-100 ">  
             <div className="flex flex-row gap-2 items-center"> 
-              {/* <Image src={`/icons/flags/us.svg`} alt="flag" className="rounded-full" width={20} height={20} />  */}
+              <Image src={`/icons/flags/${account_types[method].icon}`} alt="flag" className="rounded-full" width={20} height={20} /> 
                 { 
                   <div> 
                       {/* <p className="text-xs">{title}</p> */}
-                      <p className="text-sm font-semibold"> {method}</p>
+                      <p className="text-sm font-semibold">{account_types[method].name}</p>
                   </div>
-                } 
+                }
+
                 <div className="text-xs text-gray-500">
-                    {/* {account_types[method].available ? 
+                    {account_types[method].available ? 
                       <span className="text-green-500 sr-only">Available</span>
                       : <span className="text-gray-800 px-2 py-1 rounded-full bg-muted">Soon</span>
-                      } */}
+                      }
                 </div>
             </div>
                 {
@@ -85,16 +79,16 @@ function CustomSelector({title, options, setValue}: SelectorProps) {
              
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{title}</DropdownMenuLabel>
+        <DropdownMenuLabel>Account type</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={method} defaultValue={0} onValueChange={value => {updateValue(value) }}>
+        <DropdownMenuRadioGroup value={method} onValueChange={value => {updateValue(value as keyof typeof account_types) }}>
           {
-            Object.entries(options).map(([key, value]) => (
-              <DropdownMenuRadioItem key={key} value={value.id} defaultValue={options[0].id} className="flex flex-row gap-2 items-center ">
-                <img src={`${value.icon}`} alt="flag" className="rounded-full" width={20} height={20} /> 
+            Object.entries(account_types).map(([key, value]) => (
+              <DropdownMenuRadioItem key={key} value={key}>
+                <img src={`/icons/flags/${value.icon}`} alt="flag" className="rounded-full" width={20} height={20} /> 
                 {/* <Image src={`/flags/${value.icon}`} alt="flag" className="rounded-full" width={20} height={20} />  */}
                 {/* <p className="text-xs">{title}</p> */}
-                {/* {value.name} */}{value.name}
+                {value.name}
                 {/* {value.icon} */}
               </DropdownMenuRadioItem>
             ))
@@ -113,4 +107,4 @@ function CustomSelector({title, options, setValue}: SelectorProps) {
   )
 }
 
-export default CustomSelector
+export default Selector

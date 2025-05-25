@@ -7,14 +7,14 @@ type apiKeyType = {
 }
 
 type createQuote = apiKeyType & {
-    fiatType: string;
-    cryptoType: string;
-    address: string;
-    country: string;
-    fiatAmount: number;
+    fiatType?: string;
+    cryptoType?: string;
+    address?: string;
+    country?: string;
+    fiatAmount?: number;
 }
 
-export async function createQuote({fiatType, cryptoType,  fiatAmount, address, country,  companyToken}: createQuote): Promise<ServerResponseType> {
+export async function createQuote({fiatType, cryptoType, fiatAmount, address, country, companyToken}: createQuote): Promise<ServerResponseType> {
 
     if (!companyToken) {
         return {
@@ -32,20 +32,35 @@ export async function createQuote({fiatType, cryptoType,  fiatAmount, address, c
                 Authorization: `Bearer ${companyToken}`,
             },
             body: JSON.stringify({
-                fiatType: fiatType,
-                cryptoType: cryptoType,
-                address: address,
-                country: country,
-                fiatAmount: fiatAmount,
+                "fiatType": "BRL",
+                "cryptoType": "USDT",
+                "address": "0x874069fa1eb16d44d622f2e0ca25eea172369bc1",
+                "country": "AO",
+                "fiatAmount": 50
             })
         });
+        
 
-        console.log("data", data);
-        return {
-            success: true,
-            data: await data.json(),
-            message: "Quote generated successfully",
+        if (!data.ok) {
+            return {
+                success: false,
+                message: "Error creating pix account",
+                data: await data.json(),
+            }
+        }else{
+            return {
+                success: true,
+                data: await data.json(),
+                message: "Pix account saved successfully",
+            }
         }
+
+        // console.log("data", data);
+        // return {
+        //     success: true,
+        //     data: await data.json(),
+        //     message: "Quote generated successfully",
+        // }
 
     }catch (error) {
         return {
