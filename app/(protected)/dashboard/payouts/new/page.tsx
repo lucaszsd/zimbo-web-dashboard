@@ -147,12 +147,13 @@ export default function NewPayout() {
     }, [network])
 
     
-    const submitPayout = async () => {
+    const requestQuote = async () => {
         const { data, success, message}  = await createQuote({companyToken: "716a0432-de30-4d81-8b08-70f2366f5878",})
 
 
         if (success) {
             alert("Payout created successfully");
+            
         } else {
             alert(`Error creating payout: ${message}`);
         }
@@ -250,7 +251,7 @@ export default function NewPayout() {
                             </TableFooter>
                         </Table> 
                     <DialogFooter>  
-                    <Button type="submit" onClick={() => submitPayout()}>Proceed to payment</Button>
+                    <Button type="submit" onClick={() => requestQuote()}>Proceed to payment</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -303,7 +304,7 @@ export default function NewPayout() {
             </CardContent>
             <CardFooter className="flex gap-4 justify-end">
                 <Button>Cancel</Button>
-                {dialogOpen()}
+                <Button onClick={() => requestQuote()}>Request quote</Button>
             </CardFooter>
         </Card>
        

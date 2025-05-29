@@ -12,9 +12,9 @@ export default function Layout({children}: {children: React.ReactNode}) {
   }
  
   return (
-    <div className="relative flex min-h-screen w-full">
+    <div className="relative flex min-h-screen w-full"> 
       <DashboardSidebar />
-      <div className="flex flex-1 bg-gray-50  flex-col">
+      <div className="flex flex-1   flex-col">
         <DashboardHeader />
         <main className="flex-1 p-4 xl:px-8  ">
           {children}
