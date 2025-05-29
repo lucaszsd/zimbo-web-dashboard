@@ -71,12 +71,14 @@ export default function FeeCard({id, name, address, payin_percentage_fee, payin_
                     <p className="text-sm font-semibold">{`${payout_percentage_fee/100}% + ${payout_flat_fee/100}`}</p>
                 </div>
             </div>
-                
-                <div className="flex flex-row items-center gap-x-1">
-                    <p className="text-xs">{'Wallet: ' + address.slice(0, 5) + ' ... ' + address.slice(-4)}</p>
-                    <Button size={'icon'} onClick={() => copyToClipboard(address as string)} variant="link" className="text-xs text-gray-500">
-                        <Copy className="text-xs text-gray-500" />
-                    </Button>
+                <div>
+                    <div className="flex flex-row items-center gap-x-1">
+                        <p className="text-xs">{'Wallet: ' + address.slice(0, 5) + ' ... ' + address.slice(-4)}</p>
+                        <Button size={'icon'} onClick={() => copyToClipboard(address as string)} variant="link" className="text-xs text-gray-500">
+                            <Copy className="text-xs text-gray-500" />
+                        </Button>
+                    </div>
+                    <p className="text-xs">{'Network: Stellar'}</p>
                 </div>
            
              

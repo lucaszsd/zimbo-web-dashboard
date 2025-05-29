@@ -8,23 +8,26 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/
 export default function WebhookCard({webhookUrl, webhookSecret, events = []}: WebhookType) {
   
   const handleCopy = () => { 
-    if (webhookSecret) {
-        navigator.clipboard.writeText(webhookSecret)
-        toast.success('Webhook secret copied to clipboard', {
-            description: 'You can now use it to observer your requests',
-            richColors: true,
-        })
-    } else {
-        toast.error('Error deleting webhook', {
-            description: 'Please try again later',
-            richColors: true,
-        })
-    }
+     toast('This webook doesnt have a secret', {
+        description: 'You can observe the requests without a secret',
+    })
+    // if (webhookSecret) {
+    //     navigator.clipboard.writeText(webhookSecret)
+    //     toast.success('Webhook secret copied to clipboard', {
+    //         description: 'You can now use it to observer your requests',
+    //         richColors: true,
+    //     })
+    // } else {
+    //     toast.error('Error deleting webhook', {
+    //         description: 'Please try again later',
+    //         richColors: true,
+    //     })
+    // }
   }
 
   const handleDelete = () => {
-        toast('At the moment, deleting webhooks is not supported', {
-            description: 'You can overwrite the webhook by creating a new one',
+    toast('At the moment, deleting webhooks is not supported', {
+        description: 'You can overwrite the webhook by creating a new one',
     })
   }
 

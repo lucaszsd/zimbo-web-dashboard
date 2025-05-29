@@ -14,7 +14,7 @@ type createQuote = apiKeyType & {
     fiatAmount?: number;
 }
 
-export async function createQuote({fiatType, cryptoType, fiatAmount, address, country, companyToken}: createQuote): Promise<ServerResponseType> {
+export async function createQuote({fiatType, cryptoType, fiatAmount, address, country = 'AO', companyToken}: createQuote): Promise<ServerResponseType> {
 
     if (!companyToken) {
         return {
@@ -35,7 +35,7 @@ export async function createQuote({fiatType, cryptoType, fiatAmount, address, co
                 "fiatType": "BRL",
                 "cryptoType": "USDT",
                 "address": "0x874069fa1eb16d44d622f2e0ca25eea172369bc1",
-                "country": "AO",
+                "country": country,
                 "fiatAmount": 50
             })
         });

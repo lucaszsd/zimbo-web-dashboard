@@ -43,6 +43,15 @@ export async function createFee({address, name, payin_percentage_fee, payin_flat
             }),
         });
 
+        if (!data.ok) {
+            const errorData = await data.json();
+            JSON.stringify('Teste', errorData);
+            return {
+                success: false,
+                message: errorData.error || "Failed to create fee",
+            };
+        }
+        
         return {
             success: true,
             data: await data.json(),

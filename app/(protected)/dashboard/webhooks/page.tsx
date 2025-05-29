@@ -1,4 +1,3 @@
-'use client'
 import { DashboardHeader } from "@/components/dashboard/header";
 import Form from "./form";
 import WebhookList from "./webhook-list";

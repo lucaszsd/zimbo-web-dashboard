@@ -55,7 +55,7 @@ export default function Form() {
                 })
             }else{
                 toast.error('Houston, we have a problem', {
-                    description: 'We had problem creating this fee, try again later' + result.message,
+                    description: result.message,
                 })
             }
         })
@@ -125,7 +125,7 @@ export default function Form() {
                 Cancel
             </CancelButton> */}
             <SaveButton >
-                Save Webhook
+                Create Fee
             </SaveButton>
         </CardFooter>
     </Card>

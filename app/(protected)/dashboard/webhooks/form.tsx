@@ -40,6 +40,7 @@ export default function Form() {
                 toast.success('Webhook created successfully', {
                     description: 'You can now use this webhook to observe events' + result.message,
                 }) 
+ 
             }else{
                 toast.error('Houston, we have a problem', {
                     description: 'Please check the data you provided' + result.message,
@@ -58,7 +59,7 @@ export default function Form() {
                 <CardTitle>Create webhook</CardTitle>
                 <CardDescription>Create a webhook to observe all eventes</CardDescription>
             </CardHeader>
-        <CardContent className='flex flex-col gap-y-5'> 
+            <CardContent className='flex flex-col gap-y-5'> 
                 <div className='flex flex-col gap-y-2 '>
                     <Label>
                         Targeted URL

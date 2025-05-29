@@ -34,6 +34,7 @@ export async function webhookConfig({companyId, firebaseToken, webhookUrl}: webh
         });
  
         revalidatePath('/dashboard/webhooks')
+
         return {
             success: true,
             data: await data.json(),

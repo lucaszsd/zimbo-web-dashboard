@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input";
  
  
 import { createQuote } from "@/actions/create-quote";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import { Table, TableBody, TableCell, TableFooter, TableRow } from "@/components/ui/table";
+ 
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import CustomSelector from "./selector";
 
@@ -170,31 +172,85 @@ export default function NewPayout() {
                     <DialogDescription>
                         Send a payment to a bank account or crypto wallet.
                     </DialogDescription>
-                    </DialogHeader>
-                
-                    <Card className="w-full flex flex-col gap-4">
-                        <Label htmlFor="name" className="text-right">
-                        Sending 
-                        </Label>
-                        <Separator/>
-                        <Label htmlFor="name" className="text-right">
-                        Date
-                        </Label>
-                            <Separator/>
-                        <Label htmlFor="name" className="text-right">
-                        Sender amount
-                        </Label>
-                                <Separator/>
-                        <Label htmlFor="name" className="text-right">
-                        Receiver amount
-                        </Label>
-                                <Separator/>
-                        <Label htmlFor="name" className="text-right">
-                        Partner fee
-                        </Label> 
-                    </Card> 
-                    <DialogFooter>
-                    <Button type="submit" onClick={() => submitPayout()}>Save changes</Button>
+                    <div>
+                    </div>
+                    </DialogHeader> 
+                        <Alert>
+                            <Clock className="h-4 w-4" />
+                            <AlertTitle>Sua cotação tem validade de 5:00 minutos.</AlertTitle>    
+                        </Alert>
+                        {/* <Label>
+                            Payout details
+                        </Label> */}
+                        <Table className="w-full h-6" >
+                            <TableBody className="w-full">
+                            <TableRow className="">
+                                <TableCell className="font-medium">Payout method</TableCell>
+                                <TableCell className="text-right">
+                                <img src="/icons/flags/br.svg" alt="Brazilian flag" className="w-4 h-4 inline-block mr-2 rounded-full" />
+                                Pix</TableCell>
+                            </TableRow>
+                            <TableRow className="">
+                                <TableCell className="font-medium">Origin network</TableCell>
+                                <TableCell className="text-right">
+                                <img src="/icons/networks/stellar.svg" alt="Brazilian flag" className="w-4 h-4 inline-block mr-2 rounded-full" />
+                                Stellar</TableCell>
+                            </TableRow>
+                            <TableRow className="">
+                                <TableCell className="font-medium">Token</TableCell>
+                                <TableCell className="text-right">
+                                <img src="/icons/tokens/xlm.svg" alt="Brazilian flag" className="w-4 h-4 inline-block mr-2 rounded-full" />
+                                XLM</TableCell>
+                            </TableRow>
+                            </TableBody>
+                            <TableFooter className="w-full">
+                                <TableRow className="border-b">
+                                    <TableCell className="font-medium">Payout amount in BRL</TableCell>
+                                    <TableCell className="text-right">R$ 50.00</TableCell>
+                                </TableRow> 
+                            </TableFooter>
+                        </Table>
+                        <Table className="w-full h-6" >
+                            <TableBody className="w-full"> 
+                                 <TableRow className="border-b">
+                                    <TableCell className="font-medium">Exchange rate</TableCell>
+                                    <TableCell className="text-right">
+                                        1 XLM = 1.73 BRL
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow className="border-b">
+                                    <TableCell className="font-medium">Service fee</TableCell>
+                                    <TableCell className="text-right">
+                                        R$ 0.00
+                                    </TableCell> 
+                                </TableRow>
+                                <TableRow className="border-b">
+                                    <TableCell className="font-medium">Partner fee</TableCell>
+                                    <TableCell className="text-right">
+                                        R$ 0.00
+                                    </TableCell>
+                                    
+                                </TableRow>
+                                   <TableRow className="border-b">
+                                    <TableCell className="font-medium">Amount in USD</TableCell>
+                                    <TableCell className="text-right">
+                                        $ 8.85
+                                    </TableCell>
+                            </TableRow>
+                           
+                            
+                            </TableBody>
+                            <TableFooter className="border-t">
+                             <TableRow className="border-b">
+                                    <TableCell className="font-medium">Total in XLM</TableCell>
+                                    <TableCell className="text-right">
+                                        31.00 XLM
+                                    </TableCell>
+                            </TableRow>
+                            </TableFooter>
+                        </Table> 
+                    <DialogFooter>  
+                    <Button type="submit" onClick={() => submitPayout()}>Proceed to payment</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -204,12 +260,14 @@ export default function NewPayout() {
   return (
     <div className="gap-6 flex flex-col">
         <DashboardHeader heading="Payouts" text="Insert payout details" />
+        
         <div className="w-full max-w-2xl mx-auto bg-red-0 gap-6 flex flex-col">
         <Card className="w-full">
             <CardHeader>
                 <CardTitle>Origin Currency</CardTitle>
                 {`${network} ${token}`} 
                 <CardDescription>Select your payout details</CardDescription>
+                
             </CardHeader>
             
             <CardContent className="grid grid-cols-2 gap-4">   
@@ -248,6 +306,7 @@ export default function NewPayout() {
                 {dialogOpen()}
             </CardFooter>
         </Card>
+       
         </div>
     </div>
   )
