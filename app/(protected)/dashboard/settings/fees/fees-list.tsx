@@ -32,7 +32,7 @@ export default function FeesList() {
     })
   return (
     <div className="gap-6 flex flex-col">
-        {fees.toReversed().map((fee) => (
+        {fees.map((fee) => (
             <FeeCard key={fee.id} {...fee}   />
         ))}
     </div>

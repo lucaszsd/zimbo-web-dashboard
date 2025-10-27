@@ -6,7 +6,6 @@ import { auth } from "@/firebase.config";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useIdToken } from "react-firebase-hooks/auth";
-import { columns } from "./table/columns";
 import { DataTable } from "./table/table";
 
 export default function BankAccounts() {
@@ -35,9 +34,8 @@ export default function BankAccounts() {
           <Button>New Payout Account</Button>
         </Link>
       </DashboardHeader>
-      <div className="grid gap-8">  
-        {/* {JSON.stringify(data)} */}
-        <DataTable columns={columns} data={data}/> 
+      <div className="grid gap-8">
+        <DataTable data={data}/> 
       </div>
     </>
   );

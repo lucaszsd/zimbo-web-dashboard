@@ -10,6 +10,7 @@ import Selector from "./selector";
 import { createPixAccount } from "@/actions/create-pix-account";
 import ErrorMessage from "@/components/dashboard/error-message";
 import { Input } from "@/components/ui/input";
+import { InputMask } from "@/components/ui/masked-input";
 import { PixAccountSchema, PixAccountType } from "@/types-and-schemas/accounts/pix";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
@@ -151,7 +152,7 @@ const AddPixAccount = () => {
 
     const [pixType, setPixType] = useState<'CPF' | 'CNPJ' |  'PHONE' |  'EMAIL' | 'RANDOM'>('CPF')
     
-    const type = formState.account.keyType
+    const type = formState.account.keyType as string
    
     const { handleSubmit, register, formState: {errors} } = useForm<PixAccountType>({
         resolver: zodResolver(PixAccountSchema),
@@ -200,8 +201,15 @@ const AddPixAccount = () => {
             })
         } 
     }
-     
 
+
+    const masks = {
+        'CPF': '999.999.999-99',
+        'CNPJ': '99.999.999/9999-99',
+        'PHONE': '(99) 9999-9999',
+        'RANDOM': '********-****-****-****-************'
+    }
+     
     
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-5">  
@@ -238,7 +246,11 @@ const AddPixAccount = () => {
                 <Label>
                     {`PIX key ${type !== '' ? `(${type})` : ''}`}
                 </Label>  
-                <Input    placeholder = {'Pix key'} {...register('key')}/>  
+                {pixType == 'CPF' && <InputMask mask="___.___.___-__"  replacement={{ _: /\d/ }} placeholder = {'999.999.999-99'} {...register('key')}/>}
+                {pixType == 'CNPJ' && <InputMask mask="__.___.___/____-__" replacement={{ _: /\d/ }} placeholder = {'99.999.999/9999-99'} {...register('key')}/>}
+                {pixType == 'EMAIL' && <Input type="email" placeholder = {'email@gmail.com'} {...register('key')}/>}
+                {pixType == 'RANDOM' && <InputMask mask="********-****-****-****-************" replacement={{ '*': /[0-9a-fA-F]/ }} placeholder = {'(99) 99999-9999'} {...register('key')}/>}
+                {pixType == 'PHONE' && <InputMask  mask="(__) _____-____"  replacement={{ _: /\d/ }}placeholder = {'000.000.000-00'} {...register('key')}/>}
                 {errors.key && <ErrorMessage>{errors.key.message}</ErrorMessage>}
             </div>
 

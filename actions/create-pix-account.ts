@@ -41,9 +41,11 @@ export async function createPixAccount({fiatAccountSchema, data, companyToken}: 
         });
 
         if (!result.ok) {
+            console.error("Error creating pix account", await result.json());
+             
             return {
                 success: false,
-                message: "Error creating pix account",
+                message: 'Error creating pix account: ',
                 data: await result.json(),
             }
         }else{
